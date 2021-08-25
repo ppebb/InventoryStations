@@ -1,3 +1,5 @@
 Inventory Crafting Stations allows you to use crafting stations that are in your inventory, piggy bank, safe, forge, or an open chest without placing them down.
 
 There's config options for disabling the checks other than in the inventory.
+
+This is the alpha branch (obviously) so make sure to report bugs if you experience any.

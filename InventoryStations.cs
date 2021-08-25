@@ -43,8 +43,8 @@ namespace InventoryStations {
 
 				ModTile mTile = ModContent.GetModTile(item.createTile);
 				if (mTile != null) {
-					for (int j = 0; j < mTile.adjTiles.Length; j++) {
-						stations.Add(mTile.adjTiles[j]);
+					for (int j = 0; j < mTile.AdjTiles.Length; j++) {
+						stations.Add(mTile.AdjTiles[j]);
 					}
 				}
 			}
