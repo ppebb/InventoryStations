@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <Import Project="../tModLoader.targets" />
   <PropertyGroup>
-    <AssemblyName>InvetoryStations</AssemblyName>
+    <AssemblyName>InventoryStations</AssemblyName>
     <TargetFramework>net5.0</TargetFramework>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <LangVersion>latest</LangVersion>

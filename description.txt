@@ -1,5 +1,10 @@
-Inventory Crafting Stations allows you to use crafting stations that are in your inventory, piggy bank, safe, forge, or an open chest without placing them down.
+Inventory Crafting Stations allows you to use crafting stations that are in your inventory, piggy bank, safe, forge, void bank, or an open chest without placing them down.
 
-There's config options for disabling the checks other than in the inventory.
+Also Includes ~
+ ~ Liquid support (just use a bucket).
+ ~ Magic Storage integration, stations in your inventory will function within the crafting block.
+ ~ Magic Storage biome emulation support (Snow Biome Emulator and Biome Globe).
+ ~ Config options to disable any of the inventory checks.
+ Note: Liquid does not work in Magic Storage due to a bug I am too lazy to find a workaround to, may be fixed after the next Magic Storage update.
 
 This is the alpha branch (obviously) so make sure to report bugs if you experience any.
