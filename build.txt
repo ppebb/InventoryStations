@@ -1,9 +1,8 @@
 displayName = Inventory Crafting Stations
 author = ppeb
-version = 0.2
+version = 0.3
 homepage = https://discord.gg/EB6yPZj
 hideCode = false
 includeSource = true
 includePDB = true
 weakReferences = MagicStorage
-sortAfter = MagicStorage
