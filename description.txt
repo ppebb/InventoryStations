@@ -2,6 +2,6 @@ Inventory Crafting Stations allows you to use crafting stations that are in your
 
 Also Includes ~
  ~ Liquid support (just use a bucket).
- ~ Magic Storage integration, stations in your inventory will function within the crafting block.
+ ~ Magic Storage integration, stations in your inventory will function within the crafting block. Enable it from within a Storage Configuration Interface.
  ~ Magic Storage biome emulation support (Snow Biome Emulator and Biome Globe).
  ~ Config options to disable any of the inventory checks.

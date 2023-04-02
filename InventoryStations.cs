@@ -1,10 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Reflection;
-using Mono.Cecil.Cil;
-using MonoMod.Cil;
-using MonoMod.RuntimeDetour.HookGen;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -15,96 +10,9 @@ namespace InventoryStations {
     public class InventoryStations : Mod {
         internal static Mod MagicStorage;
         internal static bool msLoaded => ModLoader.TryGetMod("MagicStorage", out MagicStorage);
-        private static Type msCraftingGUI;
-        private static MethodInfo msAnalyzeIngredients;
-        private FieldInfo msAdjTiles;
-        private FieldInfo msZoneSnow;
-        private FieldInfo msAdjWater;
-        private FieldInfo msAdjLava;
-        private FieldInfo msAdjHoney;
-        private FieldInfo msAlchemyTable;
-        private FieldInfo msGraveyard;
-        private static int[] adjTiles;
-
-        public override void Load() {
-            if (!msLoaded)
-                return;
-
-            msCraftingGUI = MagicStorage.GetType().Assembly.GetType("MagicStorage.CraftingGUI");
-            msAnalyzeIngredients = msCraftingGUI.GetMethod("AnalyzeIngredients", BindingFlags.NonPublic | BindingFlags.Static);
-            msAdjTiles = msCraftingGUI.GetField("adjTiles", BindingFlags.NonPublic | BindingFlags.Static);
-            msZoneSnow = msCraftingGUI.GetField("zoneSnow", BindingFlags.NonPublic | BindingFlags.Static);
-            msAdjWater = msCraftingGUI.GetField("adjWater", BindingFlags.NonPublic | BindingFlags.Static);
-            msAdjLava = msCraftingGUI.GetField("adjLava", BindingFlags.NonPublic | BindingFlags.Static);
-            msAdjHoney = msCraftingGUI.GetField("adjHoney", BindingFlags.NonPublic | BindingFlags.Static);
-            msAlchemyTable = msCraftingGUI.GetField("alchemyTable", BindingFlags.NonPublic | BindingFlags.Static);
-            msGraveyard = msCraftingGUI.GetField("graveyard", BindingFlags.NonPublic | BindingFlags.Static);
-            OnAnalyzeIngredients += InventoryStations_ModifyOnAnalyzeIngredients;
-        }
 
         public override void Unload() {
             MagicStorage = null;
-            msCraftingGUI = null;
-            msAnalyzeIngredients = null;
-        }
-
-        private void InventoryStations_ModifyOnAnalyzeIngredients(ILContext il) {
-            ILCursor c = new(il);
-
-            if (!c.TryGotoNext(MoveType.Before,
-                i => i.MatchRet())) {
-                Logger.Fatal("Could not locate the end of MagicStorage.CraftingGUI.AnalyzeIngedients");
-            }
-
-            c.Emit(OpCodes.Ldsfld, msAdjTiles);
-            c.Emit(OpCodes.Ldsfld, msZoneSnow);
-            c.Emit(OpCodes.Ldsfld, msAdjWater);
-            c.Emit(OpCodes.Ldsfld, msAdjLava);
-            c.Emit(OpCodes.Ldsfld, msAdjHoney);
-            c.Emit(OpCodes.Ldsfld, msAlchemyTable);
-            c.Emit(OpCodes.Ldsfld, msGraveyard);
-
-            c.EmitDelegate<Action<bool[], bool, bool, bool, bool, bool, bool>>((eAdjTiles, eZoneSnow, eAdjWater, eAdjLava, eAdjHoney, eAlchemyTable, eGraveyard) => {
-                Player player = Main.LocalPlayer;
-                adjTiles = ModContent.GetInstance<InventoryStationsTileCheck>().AdjTiles(1);
-
-                foreach (int id in adjTiles) {
-                    eAdjTiles[id] = true;
-
-                    if (TileID.Sets.CountsAsWaterSource[id])
-                        eAdjWater = true;
-                    if (TileID.Sets.CountsAsLavaSource[id])
-                        eAdjLava = true;
-                    if (TileID.Sets.CountsAsHoneySource[id])
-                        eAdjHoney = true;
-                }
-
-                if (player.ZoneSnow)
-                    eZoneSnow = true;
-
-                if (player.adjWater)
-                    eAdjWater = true;
-
-                if (player.adjLava)
-                    eAdjLava = true;
-
-                if (player.adjHoney)
-                    eAdjHoney = true;
-
-                if (player.alchemyTable)
-                    eAlchemyTable = true;
-
-                if (player.ZoneGraveyard)
-                    eGraveyard = true;
-            });
-        }
-
-        private delegate void OrigAnalyzeIngredients();
-        private delegate void HookAnalyzeIngredients();
-
-        private static event ILContext.Manipulator OnAnalyzeIngredients {
-            add => HookEndpointManager.Modify(msAnalyzeIngredients, value);
-            remove => HookEndpointManager.Unmodify(msAnalyzeIngredients, value);
         }
     }
 
