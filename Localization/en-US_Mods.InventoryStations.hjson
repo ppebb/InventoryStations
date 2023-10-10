@@ -1,0 +1,30 @@
+Configs: {
+	ISConfig: {
+		DisplayName: Inventory Stations Config
+
+		Piggy: {
+			Label: Disable stations in piggy banks counting toward crafting.
+			Tooltip: ""
+		}
+
+		Safe: {
+			Label: Disable stations in safes counting toward crafting.
+			Tooltip: ""
+		}
+
+		Forge: {
+			Label: Disable stations in the forge counting toward crafting.
+			Tooltip: ""
+		}
+
+		Void: {
+			Label: Disable stations in void bags counting toward crafting.
+			Tooltip: ""
+		}
+
+		Chest: {
+			Label: Disable stations in the currently opened chest counting toward crafting.
+			Tooltip: ""
+		}
+	}
+}

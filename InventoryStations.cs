@@ -129,23 +129,18 @@ namespace InventoryStations {
         public override ConfigScope Mode => ConfigScope.ServerSide;
 
         [DefaultValue(true)]
-        [Label("Disable stations in piggy banks counting toward crafting.")]
         public bool Piggy;
 
         [DefaultValue(true)]
-        [Label("Disable stations in safes counting toward crafting.")]
         public bool Safe;
 
         [DefaultValue(true)]
-        [Label("Disable stations in the forge counting toward crafting.")]
         public bool Forge;
 
         [DefaultValue(true)]
-        [Label("Disable stations in void bags counting toward crafting.")]
         public bool Void;
 
         [DefaultValue(true)]
-        [Label("Disable stations in the currently opened chest counting toward crafting.")]
         public bool Chest;
     }
 }
