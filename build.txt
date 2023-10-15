@@ -1,7 +1,7 @@
 displayName = Inventory Crafting Stations
 author = ppeb
-version = 0.4.1.1
-homepage = https://discord.gg/EB6yPZj
+version = 0.4.1.2
+homepage = https://github.com/ppebb/InventoryStations
 hideCode = false
 includeSource = true
 includePDB = true
